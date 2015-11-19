@@ -1,0 +1,77 @@
+// WVU Color Overrides
+//==================================================
+
+.wvu-u-wvu-black {
+  color: $wvu-black;
+  @include wvu-override-common-background($wvu-black, $wvu-white);
+  @include wvu-heading-color($wvu-white);
+  @include wvu-button-border-color($wvu-white);
+  @include wvu-a-hover-color($wvu-black, false, false);
+}
+
+.wvu-u-pms-432-c {
+  @include wvu-override-common($pms-432-c, $wvu-white);
+  @include wvu-heading-color($wvu-white);
+  @include wvu-button-border-color($wvu-white);
+  @include wvu-a-hover-color($pms-432-c, $wvu-white, false);
+}
+
+.wvu-u-pms-429-c {
+  @include wvu-override-common($pms-429-c, $wvu-black);
+  @include wvu-heading-color($wvu-black);
+  @include wvu-hr-border-color($pms-432-c);
+}
+
+.wvu-u-pms-warm-gray-11 {
+  @include wvu-override-common($pms-warm-gray-11,$wvu-white);
+  @include wvu-heading-color($wvu-white);
+  @include wvu-a-hover-color($pms-warm-gray-11,$wvu-white,false);
+}
+
+.wvu-u-wvu-blue {
+  @include wvu-override-common($wvu-blue, $wvu-white);
+}
+
+.wvu-u-wvu-gold {
+  @include wvu-override-common($wvu-gold, $wvu-blue);
+}
+
+.wvu-u-pms-300-c {
+  @include wvu-override-common($pms-300-c, $wvu-white);
+}
+
+.wvu-u-pms-7554-c {
+  @include wvu-override-common($pms-7554-c, $wvu-white);
+}
+
+.wvu-u-pms-7557-c {
+  @include wvu-override-common($pms-7557-c, $wvu-white);
+}
+
+.wvu-u-pms-144-c {
+  @include wvu-override-common($pms-144-c, $wvu-white);
+}
+
+.wvu-u-pms-7476-c {
+  @include wvu-override-common($pms-7476-c, $wvu-white);
+}
+
+.wvu-u-pms-5625-c {
+  @include wvu-override-common($pms-5625-c, $wvu-white);
+}
+
+.wvu-u-pms-558-c {
+  @include wvu-override-common($pms-558-c, $wvu-white);
+}
+
+.wvu-u-pms-180-c {
+  @include wvu-override-common($pms-180-c, $wvu-white);
+}
+
+.wvu-u-pms-166-c {
+  @include wvu-override-common($pms-166-c, $wvu-white);
+}
+
+.wvu-u-pms-115-c {
+  @include wvu-override-common($pms-115-c, $wvu-white);
+}

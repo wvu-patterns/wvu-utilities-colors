@@ -1,0 +1,182 @@
+// WVU Color Mixins
+//==================================================
+
+@mixin wvu-background($background-color,$font-color) {
+  background-color: $background-color;
+  color: $font-color;
+  -webkit-font-smoothing: antialiased;
+}
+
+@mixin wvu-heading-color($wvu-el-font-color) {
+  h1, h2, h3, h4, h5, h6, a {
+    color: $wvu-el-font-color;
+  }
+}
+
+@mixin wvu-button-border-color($wvu-el-border-color) {
+  .button {
+    border-color: $wvu-el-border-color;
+  }
+}
+
+@mixin wvu-a-hover-color($wvu-el-hover-font-color, $wvu-el-hover-bg-color:false, $wvu-a-hover-underline: false) {
+  a {
+    &:hover {
+      @if ($wvu-el-hover-bg-color) {
+        background: $wvu-el-hover-bg-color;
+      }
+      @if ($wvu-a-hover-underline) {
+        text-decoration: underline;
+      }
+      color: $wvu-el-hover-font-color;
+    }
+  }
+}
+
+@mixin wvu-hr-border-color($wvu-hr-border-color) {
+  hr {
+    border-bottom-color: $wvu-hr-border-color;
+  }
+}
+
+@mixin wvu-color-hover-common($wvu-common-bg-color, $wvu-common-font-color, $wvu-common-hover-font-color) {
+  /* background param order: background-color, font-color */
+  @include wvu-background($wvu-common-bg-color, $wvu-common-font-color);
+  @include wvu-heading-color( $wvu-common-font-color);
+  /* hover param order: font-color, backgound-color, text-decoration */
+  @include wvu-a-hover-color($wvu-common-hover-font-color, false, true);
+}
+
+
+@mixin wvu-override-common-background($wvu-override-background-color, $wvu-override-backgound-font-color){
+  &.background {
+    background-color: $wvu-override-background-color;
+    color: $wvu-override-backgound-font-color;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@mixin wvu-override-common($wvu-override-color,$wvu-override-backgound-font-color) {
+  color: $wvu-override-color;
+  border-color: $wvu-override-color;
+  @include wvu-override-common-background($wvu-override-color,$wvu-override-backgound-font-color);
+}
+
+
+@mixin wvu-blue-background {
+  /* background param order: background-color, font-color */
+  @include wvu-background($wvu-blue, $wvu-white);
+}
+
+@mixin wvu-gold-background {
+  /* background param order: background-color, font-color */
+  @include wvu-background($wvu-gold, $wvu-blue);
+}
+
+@mixin wvu-black-background {
+  /* background param order: background-color, font-color */
+  @include wvu-background($wvu-black, $wvu-white);
+  @include wvu-heading-color($wvu-white);
+  @include wvu-button-border-color($wvu-white);
+  /* hover param order: font-color, backgound-color, text-decoration */
+  @include wvu-a-hover-color($wvu-black, false, false);
+}
+
+@mixin pms-432-c-background {
+  /* background param order: background-color, font-color */
+  @include wvu-background($pms-432-c, $wvu-white);
+  @include wvu-heading-color($wvu-white);
+  @include wvu-button-border-color($wvu-white);
+  /* hover param order: font-color, backgound-color, text-decoration */
+  @include wvu-a-hover-color($pms-432-c, $wvu-white, false);
+}
+
+@mixin pms-429-c-background {
+  /* background param order: background-color, font-color */
+  @include wvu-background($pms-429-c, $wvu-black);
+  @include wvu-hr-border-color($pms-429-c);
+}
+
+@mixin pms-warm-gray-11-background {
+  /* background param order: background-color, font-color */
+  @include wvu-background($pms-warm-gray-11, $wvu-white);
+  @include wvu-heading-color($wvu-white);
+  /* hover param order: font-color, backgound-color, text-decoration */
+  @include wvu-a-hover-color($wvu-white,$pms-warm-gray-11, false);
+}
+
+@mixin pms-warm-gray-7-background {
+  /* background param order: background-color, font-color */
+  @include wvu-background($pms-warm-gray-7, $wvu-white);
+  @include wvu-heading-color($wvu-white);
+  /* hover param order: font-color, backgound-color, text-decoration */
+  @include wvu-a-hover-color($wvu-white, $pms-warm-gray-7, false);
+}
+
+@mixin pms-warm-gray-3-background {
+  /* background param order: background-color, font-color */
+  @include wvu-background($pms-warm-gray-3, $wvu-black);
+  @include wvu-heading-color($wvu-black);
+  /* hover param order: font-color, backgound-color, text-decoration */
+  @include wvu-a-hover-color($pms-warm-gray-3, $wvu-white, false);
+}
+
+@mixin pms-286-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-286-c, $wvu-white, $pms-629-c);
+}
+
+@mixin pms-300-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-300-c, $wvu-white, $pms-629-c);
+}
+
+@mixin pms-629-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-629-c, $wvu-blue, $pms-300-c);
+}
+
+@mixin pms-7554-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-7554-c, $wvu-white, $pms-7557-c);
+}
+
+@mixin pms-7557-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-7557-c, $wvu-white, $pms-7554-c);
+}
+
+@mixin pms-144-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-144-c, $wvu-white, $pms-7476-c);
+}
+
+@mixin pms-7476-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-7476-c, $wvu-white, $pms-5625-c);
+}
+
+@mixin pms-5625-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-5625-c, $wvu-white, $pms-558-c);
+}
+
+@mixin pms-558-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-558-c, $wvu-white, $pms-5625-c);
+}
+
+@mixin pms-180-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-180-c, $wvu-white, $pms-115-c);
+}
+
+@mixin pms-166-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-166-c, $wvu-white, $pms-115-c);
+}
+
+@mixin pms-115-c-background {
+  /* background param order: background-color, font-color, hover-font-color */
+  @include wvu-color-hover-common($pms-115-c, $wvu-white, $pms-166-c);
+}
