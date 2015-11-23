@@ -26,6 +26,9 @@
     "tests"
   ],
   "dependencies": {
-    "wvu-variables-colors": "1.0.0"
+    "wvu-utilities-variables": "1.0.0"
+  },
+  "devDependencies": {
+    "neat" : "1.7.2"
   }
 }
