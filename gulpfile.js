@@ -39,9 +39,7 @@ gulp.task('scss-lint', function() {
 
 gulp.task('compile-scss', function(){
   return gulp.src([
-      './bower_components/wvu-patterns-masthead-logo/src/scss/*.scss',
-      './bower_components/wvu-patterns-masthead-links/src/scss/*.scss',
-      './src/scss/*.scss'
+      './test/scss/styles.scss'
     ])
     .pipe(rename(function (path) {
       path.basename = path.basename.substring(1)
@@ -56,16 +54,16 @@ gulp.task('compile-scss', function(){
 
 gulp.task('build-json',function(){
   return gulp.src([
-    './src/handlebars/data/*.json',
+    './test/data/*.json',
     './bower_components/wvu-patterns-masthead-**/src/handlebars/data/*.json'
     ])
-  .pipe(extend('_wvu-masthead.json',true,2))
+  .pipe(extend('_wvu-utilities-color.json',true,2))
   .pipe(gulp.dest("./build/data"));
 })
 
 gulp.task('compile', ['build-json','scss-lint','compile-scss'], function () {
 
-  var templateData = require('./build/data/_wvu-masthead.json');
+  var templateData = require('./build/data/_wvu-utilities-color.json');
 
   var options = {};
 
