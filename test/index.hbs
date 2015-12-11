@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>WVU Pattern Library - Masthead Module</title>
     <meta content='width=device-width, initial-scale=1' name='viewport'>
 
-    <link href="styles.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
 
   </head>
 
   <body>
+    <div class="container">
+      <h1>Color Tests</h1>
+      <h2>Classes</h2>
+      {{#wvu_variables.colors}}
+        <div class="color-classes wvu-u-{{{.}}}">
+          .wvu-u-{{{.}}}
+        </div>
+      {{/wvu_variables.colors}}
 
+      <h2>Mixins</h2>
+      <!-- TODO: Create Mixin Tests -->
+    </div>
   </body>
 </html>

@@ -29,6 +29,7 @@
     "wvu-utilities-variables": "1.0.0"
   },
   "devDependencies": {
-    "neat" : "1.7.2"
+    "neat" : "1.7.2",
+    "normalize-scss": "~3.0.3"
   }
 }

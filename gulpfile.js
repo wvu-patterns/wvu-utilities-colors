@@ -1,21 +1,23 @@
 'use strict';
 
 var gulp = require('gulp'),
+    fs = require('fs'),
+    del = require('del'),
     sass = require('gulp-sass'),
+    scsslint = require('gulp-scss-lint'),
+    sourcemaps = require('gulp-sourcemaps'),
     prefix = require('gulp-autoprefixer'),
     rename = require('gulp-rename'),
-    del = require("del"),
-    runSequence = require('run-sequence'),
-    scsslint = require('gulp-scss-lint'),
     handlebars = require('gulp-compile-handlebars'),
-    extend = require('gulp-extend'),
-    browserSync = require('browser-sync');
+    todo = require('gulp-todo'),
+    browserSync = require('browser-sync'),
+    reload = browserSync.reload;
 
 
 gulp.task('browser-sync', function() {
   browserSync({
     server: {
-      baseDir: "./build/",
+      baseDir: "./build",
     },
     open: false,
     logConnections: true,
@@ -23,47 +25,44 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('clean', function(cb){
-  del([
-    'build/**'
-  ], cb);
+gulp.task('todo', function(){
+  return gulp.src([
+    './**/*.scss',
+    '!./bower_components/**/*.scss',
+    './**/*.html',
+    '!./bower_components/**/*.html',
+    './**/*.hbs',
+    '!./bower_components/**/*.hbs',
+    './**/*.haml',
+    '!./bower_components/**/*.haml'
+  ])
+  .pipe(todo())
+  .pipe(gulp.dest('./'));
 });
 
-gulp.task('scss-lint', function() {
-  return gulp.src('./src/scss/*.scss')
-    .pipe(scsslint({
-      'config': '.scss-lint.yml'
-    }))
-    .pipe(scsslint.failReporter());
-});
 
-gulp.task('compile-scss', function(){
+gulp.task('compile-scss', ['scss-lint'], function(){
   return gulp.src([
       './test/scss/styles.scss'
     ])
-    .pipe(rename(function (path) {
-      path.basename = path.basename.substring(1)
-    }))
+    .pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: ['scss'],
       outputStyle: 'expanded'
     }))
     .pipe(prefix("last 1 version", "> 1%", "ie 8", "ie 7", { cascade: true }))
+    .pipe(sourcemaps.write('maps', {
+      includeContent: false,
+      sourceRoot: './build/css/'
+    }))
     .pipe(gulp.dest('./build/css/'));
 });
 
-gulp.task('build-json',function(){
-  return gulp.src([
-    './test/data/*.json',
-    './bower_components/wvu-patterns-masthead-**/src/handlebars/data/*.json'
-    ])
-  .pipe(extend('_wvu-utilities-color.json',true,2))
-  .pipe(gulp.dest("./build/data"));
-})
+gulp.task('build', ['todo','compile-scss'], function () {
 
-gulp.task('compile', ['build-json','scss-lint','compile-scss'], function () {
-
-  var templateData = require('./build/data/_wvu-utilities-color.json');
+  var templateData = JSON.parse(fs.readFileSync('./data/_wvu-colors.json'));
+  var variablesData = JSON.parse(fs.readFileSync('./bower_components/wvu-utilities-variables/data/_wvu-variables.json'));
+  templateData.wvu_variables = variablesData.wvu_variables;
 
   var options = {};
 
@@ -73,9 +72,20 @@ gulp.task('compile', ['build-json','scss-lint','compile-scss'], function () {
         .pipe(gulp.dest('./build'));
 });
 
-gulp.task('build',function(){
-  runSequence('clean','compile');
+gulp.task('scss-lint', function(){
+  return gulp.src('./src/scss/*.scss')
+    .pipe(scsslint({
+      'bundleExec': true,
+      'config': './.scss-lint.yml'
+    }))
+    .pipe(scsslint.failReporter('E'));
 });
 
-gulp.task('test',['build','browser-sync']);
-gulp.task('ci',['scss-lint']);
+gulp.task('ci',['build']);
+
+gulp.task('default',['build','browser-sync'], function(){
+  gulp.watch(["./src/**/*.scss","./test/scss/*.scss"],["build"]);
+  gulp.watch(["./test/**/*.hbs","./data/*.json"],["build"]);
+  gulp.watch("./build/**/*.html").on('change',reload);
+  gulp.watch("./build/css/*.css").on('change',reload);
+});

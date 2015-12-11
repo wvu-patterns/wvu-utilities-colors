@@ -1,23 +1,20 @@
-// Test only dependency
-// Bourbon & Neat
-// =================================================
-@import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
-@import "../bower_components/neat/app/assets/stylesheets/neat";
-
-
-// Dependencies
+// Default Variable Overrides
 // =================================================
 
-// wvu-utilities-variables
-@import "../bower_components/wvu-utilities-variables/src/wvu-variables-base";
-@import "../bower_components/wvu-utilities-variables/src/wvu-variables-color";
-@import "../bower_components/wvu-utilities-variables/src/wvu-variables-images";
-@import "../bower_components/wvu-utilities-variables/src/wvu-variables-mediaquery";
-@import "../bower_components/wvu-utilities-variables/src/wvu-variables-overrides";
 
-
-// Utiltity
+// Include Manifest
 // =================================================
+@import './src/scss/manifest';
 
-@import "../src/scss/_wvu-color-mixins";
-@import "../src/scss/_wvu-color-classes";
+
+// Include Test Styles
+// =================================================
+.container {
+  @include outer-container();
+}
+
+.color-classes {
+  border: 3px solid;
+  margin: 15px;
+  padding: 15px;
+}

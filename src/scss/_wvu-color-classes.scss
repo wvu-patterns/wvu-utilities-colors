@@ -2,11 +2,11 @@
 //==================================================
 
 .wvu-u-wvu-black {
-  color: $wvu-black;
   @include wvu-override-common-background($wvu-black, $wvu-white);
   @include wvu-heading-color($wvu-white);
   @include wvu-button-border-color($wvu-white);
   @include wvu-a-hover-color($wvu-black, false, false);
+  color: $wvu-black;
 }
 
 .wvu-u-pms-432-c {
@@ -23,9 +23,9 @@
 }
 
 .wvu-u-pms-warm-gray-11 {
-  @include wvu-override-common($pms-warm-gray-11,$wvu-white);
+  @include wvu-override-common($pms-warm-gray-11, $wvu-white);
   @include wvu-heading-color($wvu-white);
-  @include wvu-a-hover-color($pms-warm-gray-11,$wvu-white,false);
+  @include wvu-a-hover-color($pms-warm-gray-11, $wvu-white, false);
 }
 
 .wvu-u-wvu-blue {
